@@ -1,0 +1,6 @@
+PoseList pose_list
+uint8 mode
+---
+moveit_msgs/RobotTrajectory[] trajectories
+geometry_msgs/Pose[] poses
+uint8 responseindex

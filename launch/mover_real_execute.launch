@@ -1,0 +1,55 @@
+<launch>
+    <arg name="robot_ip" default="192.168.1.214" />
+
+
+    <arg name="report_type" default="normal" />	
+    <arg name="show_rviz" default="true" />
+    <arg name="no_gui_plan" default="false" />
+    <arg name="xarm_hw_ns" default="xarm" />
+    <arg name="ext_ns" default="" />
+    <arg name="velocity_control" default="false"/>
+    <arg name="enforce_limits" default="true" />
+    <arg name="jnt_stat_pub_rate" default="10" />
+
+    <arg name="baud_checkset" default="true" />
+	<arg name="default_gripper_baud" default="2000000" />
+
+    <arg name="model1300" default="false" />
+    <arg name="add_realsense_d435i" default="false" />
+    <arg name="add_d435i_links" default="false" />
+    <arg name="attach_to" default="world" />
+    <arg name="attach_xyz" default="'0 0 0'" />
+    <arg name="attach_rpy" default="'0 0 0'" />
+    <arg name="robot_sn" default="" />
+        
+
+	
+	<include file="$(find realsense2_camera)/launch/rs_camera.launch" >
+        <arg name="align_depth" value="true"/>
+        <arg name="publish_tf" value="false"/>
+    </include>
+    
+    <node name="trajectory_mover" pkg="xarm_moveit" type="mover_server.py" args="--wait" output="screen"/>
+    <include file="$(find xarm6_gripper_moveit_config)/launch/realMove_exec.launch" >
+        <arg name="report_type" value="$(arg report_type)"/>
+        <arg name="show_rviz" value="$(arg show_rviz)"/>
+        <arg name="no_gui_plan" value="$(arg no_gui_plan)"/>
+        <arg name="xarm_hw_ns" value="$(arg xarm_hw_ns)"/>
+        <arg name="ext_ns" value="$(arg ext_ns)"/>
+        <arg name="velocity_control" value="$(arg velocity_control)"/>
+        <arg name="enforce_limits" value="$(arg enforce_limits)"/>
+        <arg name="jnt_stat_pub_rate" value="$(arg jnt_stat_pub_rate)"/>
+        <arg name="baud_checkset" value="$(arg baud_checkset)"/>
+
+        <arg name="default_gripper_baud" value="$(arg default_gripper_baud)"/>
+        <arg name="model1300" value="$(arg model1300)"/>
+        <arg name="add_realsense_d435i" value="$(arg add_realsense_d435i)"/>
+        <arg name="add_d435i_links" value="$(arg add_d435i_links)"/>
+        <arg name="attach_to" value="$(arg attach_to)"/>
+        <arg name="attach_xyz" value="$(arg attach_xyz)"/>
+        <arg name="attach_rpy" value="$(arg attach_rpy)"/>
+        <arg name="robot_sn" value="$(arg robot_sn)"/>
+	    
+    </include>
+    
+</launch>

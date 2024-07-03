@@ -1,0 +1,12 @@
+sensor_msgs/CameraInfo rgb_camera_info
+sensor_msgs/CameraInfo depth_camera_info
+sensor_msgs/Image rgb
+sensor_msgs/Image depth
+geometry_msgs/Pose pose
+string prompt
+uint8 detect_mode
+---
+uint8 detect_number
+float64[] rectangle
+geometry_msgs/Pose[] poses
+uint8 responseindex
